@@ -1,26 +1,24 @@
 <template>
-  <img alt="Vue logo" src="./assets/logo.png">
-  <HelloWorld msg="Welcome to Your Vue.js App"/>
+  <div v-for="house in houseData" v-bind:key="house.id">
+    <HouseCard :data="house" :realtor="returnRealtor(house.realtor_id)" />
+  </div>
 </template>
 
 <script>
-import HelloWorld from './components/HelloWorld.vue'
-
+import HouseCard from './components/HouseCard.vue'
+import homeData from './assets/homeData.json'
+import realtorData from './assets/realtorData.json'
 export default {
   name: 'App',
   components: {
-    HelloWorld
+    HouseCard
+  }, setup () {
+    const houseData = homeData;
+    const realtors = realtorData;
+    const returnRealtor = (realtor_id) => {
+      return realtors[realtors.findIndex(realtor => realtor.id === realtor_id)]
+    }
+    return {houseData, realtors, returnRealtor}
   }
 }
 </script>
-
-<style>
-#app {
-  font-family: Avenir, Helvetica, Arial, sans-serif;
-  -webkit-font-smoothing: antialiased;
-  -moz-osx-font-smoothing: grayscale;
-  text-align: center;
-  color: #2c3e50;
-  margin-top: 60px;
-}
-</style>

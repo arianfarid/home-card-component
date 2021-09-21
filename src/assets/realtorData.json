@@ -1,0 +1,13 @@
+[
+{
+    "id": 1,
+    "name": "Jane Doe",
+    "number": "(111) 111-1111",
+    "image": "/images/jane.png"
+},
+{
+    "id": 2,
+    "name": "John Doe",
+    "number": "(222) 222-222",
+    "image": "/images/john.png"
+} ]

@@ -1,0 +1,34 @@
+[
+{
+    "id": 1,
+    "type": "Detached House",
+    "age": 5,
+    "price": "750,000",
+    "address": "742 Evergreen Terrace",
+    "bedroom": 3,
+    "bathroom": 2,
+    "photos": ["/images/1-1.jpg", "/images/1-2.jpg"],
+    "realtor_id": 1
+},
+{
+    "id": 2,
+    "type": "Mansion",
+    "age": 7,
+    "price": "1,250,000",
+    "address": "134 Funion Court",
+    "bedroom": 3,
+    "bathroom": 2,
+    "photos": ["/images/2-1.jpg", "/images/2-2.jpg"],
+    "realtor_id": 1
+},
+{
+    "id": 3,
+    "type": "Townhouse",
+    "age": 2,
+    "price": "200,000",
+    "address": "8012 Pollock Drive",
+    "bedroom": 1,
+    "bathroom": 2,
+    "photos": ["/images/3-1.jpg", "/images/3-2.jpg"],
+    "realtor_id": 2
+} ]

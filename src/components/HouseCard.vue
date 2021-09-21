@@ -1,18 +1,23 @@
 <template>
     <div class="w-full bg-white sm:w-80 sm:rounded-lg sm:shadow-lg sm:m-2 lg:w-96">
         <!-- images and favorite -->
-        <div class="h-48 bg-gray-100 sm:rounded-t-lg">
+        <div class="h-48 bg-gray-100 sm:rounded-t-lg relative">
             <!-- favorite icon -->
-<!--             <div class="m-2 right-0 top-0">
-                <svg xmlns="http://www.w3.org/2000/svg" width="24" height="24" viewBox="0 0 24 24">
-                    <path d="M12 9.229c.234-1.12 1.547-6.229 5.382-6.229 2.22 0 4.618 1.551 4.618 5.003 0 3.907-3.627 8.47-10 12.629-6.373-4.159-10-8.722-10-12.629 0-3.484 2.369-5.005 4.577-5.005 3.923 0 5.145 5.126 5.423 6.231zm-12-1.226c0 4.068 3.06 9.481 12 14.997 8.94-5.516 12-10.929 12-14.997 0-7.962-9.648-9.028-12-3.737-2.338-5.262-12-4.27-12 3.737z"></path>
+            <div v-if="!favorite" class="absolute top-0 right-0 z-10 p-1" v-on:click="emitToggleFavorite()">
+                <svg class="w-6 h-6" fill="none" stroke="white" viewBox="0 0 24 24" xmlns="http://www.w3.org/2000/svg">
+                    <path stroke-linecap="round" stroke-linejoin="round" stroke-width="2" d="M4.318 6.318a4.5 4.5 0 000 6.364L12 20.364l7.682-7.682a4.5 4.5 0 00-6.364-6.364L12 7.636l-1.318-1.318a4.5 4.5 0 00-6.364 0z"></path>
                 </svg>
-            </div> -->
+            </div>
+            <div v-if="favorite" class="absolute top-0 right-0 z-10 p-1" v-on:click="emitToggleFavorite()">
+                <svg class="w-6 h-6" fill="red" stroke="red" viewBox="0 0 24 24" xmlns="http://www.w3.org/2000/svg">
+                    <path stroke-linecap="round" stroke-linejoin="round" stroke-width="2" d="M4.318 6.318a4.5 4.5 0 000 6.364L12 20.364l7.682-7.682a4.5 4.5 0 00-6.364-6.364L12 7.636l-1.318-1.318a4.5 4.5 0 00-6.364 0z"></path>
+                </svg>
+            </div>
             <!-- Carousel -->
             <Carousel class="h-48 bg-gray-100 sm:rounded-t-lg">
                 <Slide class="h-48 bg-gray-100 sm:rounded-t-lg bg-center bg-cover" v-for="slide in data.photos" :key="slide" :style="'background-image: url(' + slide + ')'">
-                        <!-- <img class="carousel__item" v-bind:src="slide"> -->
-                <Pagination class="absolute bottom-0"/>
+                    <!-- <img class="carousel__item" v-bind:src="slide"> -->
+                    <Pagination class="absolute bottom-0" />
                 </Slide>
                 <template #addons>
                     <Navigation />
@@ -74,9 +79,17 @@ export default {
         Pagination,
         Navigation,
     },
+    emits: ['toggledFavorite'],
     props: {
         data: Object,
+        favorite: Boolean,
         realtor: Object
+    },
+    setup(props, context) {
+        const emitToggleFavorite = () => {
+            context.emit("toggledFavorite", { "id": props.data.id })
+        }
+        return { emitToggleFavorite }
     }
 };
 </script>
@@ -84,31 +97,35 @@ export default {
 .card-text {
     @apply text-gray-600 text-sm;
 }
+
 .carousel__item {
-  min-height: 200px;
-  width: 100%;
-  background-color: var(--carousel-color-primary);
-  color:  var(--carousel-color-white);
-  font-size: 20px;
-  border-radius: 8px;
-  display: flex;
-  justify-content: center;
-  align-items: center;
-  @apply rounded-lg;
+    min-height: 200px;
+    width: 100%;
+    background-color: var(--carousel-color-primary);
+    color: var(--carousel-color-white);
+    font-size: 20px;
+    border-radius: 8px;
+    display: flex;
+    justify-content: center;
+    align-items: center;
+    @apply rounded-lg;
 }
 
 .carousel__slide {
-  padding: 10px;
+    padding: 10px;
 }
+
 .carousel__pagination-button--active {
-  background-color: white;
+    background-color: white;
 }
+
 .carousel__pagination-button,
-.carousel__pagination-button--active{
-  @apply rounded-full;
+.carousel__pagination-button--active {
+    @apply rounded-full;
 }
+
 .carousel__prev,
 .carousel__next {
-  /*box-sizing: content-box;*/
+    /*box-sizing: content-box;*/
 }
 </style>
